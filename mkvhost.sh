@@ -1,5 +1,13 @@
 #!/bin/bash
 
+help="Usage: mkvhost.sh YOUR_HOST_WITHOUT_TLD YOUR_LOCAL_PORT \n(exp. ./mkvhost.sh foobar 8080 will create foobar.localhost virtual host that will proxy_pass to http://localhost:8080)\n"
+
+# Print help message if asked for
+if [[ $1 = "-h" || $1 = "--help" ]]; then
+        printf "${help}"
+        exit
+fi
+
 if [[ $(id -u) -ne 0 ]] ; then
 	echo "Please run as root";
 	exit 1;
