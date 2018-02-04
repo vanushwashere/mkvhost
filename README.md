@@ -3,6 +3,9 @@ A dead simply script for making virtual host files for nginx reverse proxy.
 Virtual hosts will be with **.localhost** TLD. 
 _(exp. foobar.localhost, yoursite.localhost etc. )_ 
 
+# Help
+ - Run `./mkvhost -h` for help
+
 # Usage
  - Simply pull the repository where you wish
  - Add `mkvhost.sh` permission to execute
