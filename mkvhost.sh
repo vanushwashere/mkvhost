@@ -20,12 +20,13 @@ fi
 
 HOST=$1;
 PORT=$2;
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";
 
 echo "Creating vhost file..."
-cp ./.localhost ./$HOST.localhost
+cp $DIR/.localhost $DIR/$HOST.localhost
 
-HOSTFILE="${HOST}.localhost"
-echo "Host file created."
+HOSTFILE="${DIR}/${HOST}.localhost"
+echo "Host file created: ${HOSTFILE}"
 
 echo "Replacing HOST and PORT"
 
@@ -41,11 +42,11 @@ done <<< "$STR"
 echo "Final nginx config generated."
 
 echo "Copying to /etc/nginx/sites-available/"
-cp ./$HOSTFILE /etc/nginx/sites-available/
+cp "${HOSTFILE}" "/etc/nginx/sites-available/"
 
 echo "Symlinking config to /etc/nginx/sites-enabled/"
-ln -s /etc/nginx/sites-available/$HOSTFILE /etc/nginx/sites-enabled/$HOSTFILE
+ln -s "/etc/nginx/sites-available/${HOST}.localhost" "/etc/nginx/sites-enabled/${HOST}.localhost"
 
 echo "Removing temp files"
-rm -f ./$HOSTFILE
+rm -f $HOSTFILE
 exit;
